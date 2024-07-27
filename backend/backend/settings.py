@@ -161,9 +161,9 @@ DJOSER = {
     'USER_ID_FIELD': 'email',
     'LOGIN_FIELD': 'email',
 
-    'PASSWORD_RESET_CONFIRM_URL': '/api/auth/password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': '/api/auth/username/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': '/api/auth/account/confirm-creation/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL': '/api/v1/auth/password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': '/api/v1/auth/username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': '/api/v1/auth/account/confirm-creation/{uid}/{token}',
 
     'SEND_ACTIVATION_EMAIL': True,
     'SEND_CONFIRMATION_EMAIL': True,
