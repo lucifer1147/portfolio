@@ -2,7 +2,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext as _
 
 
-class CustomUserManger(BaseUserManager):
+class CustomUserManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError(_("Email is required when creating a user"))
