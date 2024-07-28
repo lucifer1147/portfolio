@@ -161,9 +161,9 @@ DJOSER = {
     'USER_ID_FIELD': 'email',
     'LOGIN_FIELD': 'email',
 
-    'PASSWORD_RESET_CONFIRM_URL': '/api/v1/auth/password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': '/api/v1/auth/username/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': '/api/v1/auth/account/confirm-creation/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL': 'api/v1/auth/password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': 'api/v1/auth/username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': 'api/v1/auth/account/confirm-creation/{uid}/{token}',
 
     'SEND_ACTIVATION_EMAIL': True,
     'SEND_CONFIRMATION_EMAIL': True,
@@ -171,8 +171,10 @@ DJOSER = {
     'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
 
     'USER_CREATE_PASSWORD_RETYPE': True,
-    'SET_PASSWORD_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
+    'USERNAME_RESET_CONFIRM_RETYPE': True,
+
+    'LOGOUT_ON_PASSWORD_CHANGE': True,
 
     'SERIALIZERS': {
         'user_create': 'users.serializers.CreateUserSerializer',
@@ -180,3 +182,17 @@ DJOSER = {
         'user_delete': 'djoser.serializers.UserDeleteSerializer'
     }
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "info@ANewWorld.com"
+SITE_NAME = "A New World"
+
+DOMAIN = os.getenv('DOMAIN')
+
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
