@@ -1,9 +1,54 @@
 <script>
     import img from '$lib/images/6dd4114810b815580ff0e3ac19c04fa0.jpg'
-    import {apiUrl} from "$lib/stores.js";
+    import {apiUrl, active} from "$lib/stores.js";
+    import {browser} from "$app/environment";
+    import {goto} from "$app/navigation";
 
-    const onSubmit = () => {
-        let url = $apiUrl + "auth/"
+    let usernameError, emailError, passwordError;
+
+    const onSubmit = async () => {
+        let url = $apiUrl + "users/"
+
+        let body = {
+            email: details.email,
+            username: details.username,
+            password: details.password,
+            re_password: details.password
+        }
+
+        usernameError = undefined
+        emailError = undefined
+        passwordError = undefined
+
+        let data = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+
+        let json = await data.json()
+        console.log(json)
+
+        if (json.username === body.username && json.email === body.email && json.password === undefined){
+            if (browser) {
+                goto('/' + $active)
+            }
+        } else {
+            if (json.username !== body.username && json.username !== undefined) {
+                usernameError = json.username[0]
+                details.username = ''
+            }
+            if (json.password !== body.password && json.password !== undefined) {
+                passwordError = json.password[0]
+                details.password = ''
+            }
+            if (json.email !== body.email && json.email !== undefined) {
+                emailError = json.email[0]
+                details.email = ''
+            }
+        }
     }
 
     let details = {
@@ -22,12 +67,15 @@
             </div>
         </div>
         <div class="w-[50%]">
-            <input type="text" class="h-12 rounded-lg w-2/3 px-3 text-lg text-slate-900 mb-1" placeholder="Email Address..." bind:value={details.email} />
-            <input type="text" class="h-12 rounded-lg w-2/3 px-3 text-lg text-slate-900 mb-1" placeholder="Username..." bind:value={details.username} />
-            <input type="password" class="h-12 rounded-lg w-2/3 px-3 text-lg text-slate-900 mb-1" placeholder="Password..." bind:value={details.password} />
+            <div class="w-2/3 flex items-center gap-1 text-xs"><hr class="w-2">Email<hr class="w-full"></div>
+            <input type="text" class={"h-12 rounded-lg w-2/3 px-3 text-lg text-slate-900" + (emailError ? " placeholder-red-300" : "")} placeholder={emailError || "Email Address..."} bind:value={details.email} />
+            <div class="w-2/3 flex items-center gap-1 text-xs"><hr class="w-2">Username<hr class="w-full"></div>
+            <input type="text" class={"h-12 rounded-lg w-2/3 px-3 text-lg text-slate-900" + (usernameError ? " placeholder-red-300" : "")} placeholder={usernameError || "Username..."} bind:value={details.username} />
+            <div class="w-2/3 flex items-center gap-1 text-xs"><hr class="w-2">Password<hr class="w-full"></div>
+            <input type="password" class={"h-12 rounded-lg w-2/3 px-3 text-lg text-slate-900 mb-1" + (passwordError ? " placeholder-red-300" : "")} placeholder={passwordError || "Password..."} bind:value={details.password} />
 
             <br>
-            <button class="w-2/3 h-12 mb-3 mt-1 bg-gray-800 rounded-lg" on:click={onSubmit()}>Sign Up</button>
+            <button class="w-2/3 h-12 mb-3 mt-1 bg-gray-800 rounded-lg" on:click={onSubmit}>Sign Up</button>
 
             <div class="flex w-2/3 items-center">
                 <hr class="w-full"><p class="text-xs">OR</p><hr class="w-full">
