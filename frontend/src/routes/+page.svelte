@@ -1,5 +1,6 @@
 <script>
     import {active} from '$lib/stores.js';
+    import {redirect} from "@sveltejs/kit";
     active.set('home')
 </script>
 
@@ -13,8 +14,8 @@
             </p>
 
             <div class="pt-32">
-                <button class="bg-teal-400 text-xl px-6 py-3 rounded-l-lg w-1/4">Sign Up</button>
-                <button class="bg-teal-400 text-xl px-6 py-3 rounded-r-lg w-1/4">Login</button>
+                <button class="bg-teal-400 text-xl px-6 py-3 rounded-l-lg w-1/4"><a href="/api/v1/auth/signup">Sign Up</a></button>
+                <button class="bg-teal-400 text-xl px-6 py-3 rounded-r-lg w-1/4"><a href="/api/v1/auth/login">Login</a></button>
             </div>
 
             <div class="flex w-1/2 justify-center items-center text-[#909090]">
