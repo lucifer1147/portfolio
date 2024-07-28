@@ -1,6 +1,6 @@
 <script>
     import img from '$lib/images/6dd4114810b815580ff0e3ac19c04fa0.jpg'
-    import {apiUrl, active} from "$lib/stores.js";
+    import {apiUrl} from "$lib/stores.js";
     import {browser} from "$app/environment";
     import {goto} from "$app/navigation";
 
@@ -33,7 +33,7 @@
 
         if (json.username === body.username && json.email === body.email && json.password === undefined){
             if (browser) {
-                goto('/' + $active)
+                await goto('/api/v1/auth/signup/confirm-email')
             }
         } else {
             if (json.username !== body.username && json.username !== undefined) {
