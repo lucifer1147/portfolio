@@ -19,5 +19,5 @@
         </button>
     </nav>
 
-    <slot active={active}/>
+    <slot/>
 </div>
