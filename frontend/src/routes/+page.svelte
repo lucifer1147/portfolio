@@ -1,5 +1,10 @@
 <script>
     import {active} from '$lib/stores.js';
+    import {isLoggedIn} from "$lib/commonfuncs.js";
+
+    let loggedIn;
+    isLoggedIn().then((v) => loggedIn = v)
+
     active.set('home')
 </script>
 
@@ -13,8 +18,15 @@
             </p>
 
             <div class="pt-32">
-                <button class="bg-teal-400 text-xl px-6 py-3 rounded-l-lg w-1/4"><a href="/api/v1/auth/signup">Sign Up</a></button>
-                <button class="bg-teal-400 text-xl px-6 py-3 rounded-r-lg w-1/4"><a href="/api/v1/auth/login">Login</a></button>
+                {#if loggedIn}
+                    <button class="bg-teal-400 text-xl px-6 py-3 rounded-lg w-1/2"><a
+                            href="/dashboard">Go to Dashboard</a></button>
+                {:else}
+                    <button class="bg-teal-400 text-xl px-6 py-3 rounded-l-lg w-1/4 border-r-2 border-white"><a
+                            href="/api/v1/auth/signup">Sign Up</a></button>
+                    <button class="bg-teal-400 text-xl px-6 py-3 rounded-r-lg w-1/4 -translate-x-1 border-l-2 border-white">
+                        <a href="/api/v1/auth/login">Login</a></button>
+                {/if}
             </div>
 
             <div class="flex w-1/2 justify-center items-center text-[#909090]">
