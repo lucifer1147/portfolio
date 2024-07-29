@@ -54,7 +54,7 @@
     }
 </script>
 
-<div class="w-full h-[90%] flex items-center justify-center">
+<div class="w-full h-[90%] gap-y-4 flex flex-col items-center justify-center">
     <div class="flex flex-col justify-center items-center w-1/2 h-2/3 bg-white backdrop-blur-2xl bg-opacity-50 rounded-2xl drop-shadow-lg text-black px-20">
         <h2 class="text-4xl">Welcome Back!</h2>
 
@@ -77,4 +77,5 @@
 
         <button class="w-full bg-teal-300 hover:bg-teal-400 h-12 text-xl rounded-lg" on:click={createJWT}>Login</button>
     </div>
+    <p class="text-sm font-semibold w-full text-center">New here? <a href="/api/v1/auth/signup" class="text-blue-500 hover:text-indigo-500">SignUp</a> now!</p>
 </div>
