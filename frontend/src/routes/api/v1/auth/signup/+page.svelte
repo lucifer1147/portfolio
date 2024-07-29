@@ -20,7 +20,7 @@
         emailError = undefined
         passwordError = undefined
 
-        let data = await fetch(url, {
+        let response = await fetch(url, {
             method: 'POST',
             headers: {
                 "Content-Type": 'application/json'
@@ -28,27 +28,27 @@
             body: JSON.stringify(body)
         })
 
-        let json = await data.json()
-        console.log(json)
 
-        if (json.username === body.username && json.email === body.email && json.password === undefined){
-            if (browser) {
-                await goto('/api/v1/auth/signup/confirm-email')
-            }
-        } else {
-            if (json.username !== body.username && json.username !== undefined) {
-                usernameError = json.username[0]
-                details.username = ''
-            }
-            if (json.password !== body.password && json.password !== undefined) {
-                passwordError = json.password[0]
-                details.password = ''
-            }
-            if (json.email !== body.email && json.email !== undefined) {
-                emailError = json.email[0]
-                details.email = ''
-            }
+        if (response.ok && browser) {
+            await goto('/api/v1/auth/signup/confirm-email')
+            return
         }
+
+        let json = await response.json()
+
+        if (json.username !== body.username && json.username !== undefined) {
+            usernameError = json.username[0]
+            details.username = ''
+        }
+        if (json.password !== body.password && json.password !== undefined) {
+            passwordError = json.password[0]
+            details.password = ''
+        }
+        if (json.email !== body.email && json.email !== undefined) {
+            emailError = json.email[0]
+            details.email = ''
+        }
+
     }
 
     let details = {
@@ -67,18 +67,38 @@
             </div>
         </div>
         <div class="w-[50%]">
-            <div class="w-2/3 flex items-center gap-1 text-xs"><hr class="w-2">Email<hr class="w-full"></div>
-            <input type="text" class={"h-12 rounded-lg w-2/3 px-3 text-lg text-slate-900" + (emailError ? " placeholder-red-300" : "")} placeholder={emailError || "Email Address..."} bind:value={details.email} />
-            <div class="w-2/3 flex items-center gap-1 text-xs"><hr class="w-2">Username<hr class="w-full"></div>
-            <input type="text" class={"h-12 rounded-lg w-2/3 px-3 text-lg text-slate-900" + (usernameError ? " placeholder-red-300" : "")} placeholder={usernameError || "Username..."} bind:value={details.username} />
-            <div class="w-2/3 flex items-center gap-1 text-xs"><hr class="w-2">Password<hr class="w-full"></div>
-            <input type="password" class={"h-12 rounded-lg w-2/3 px-3 text-lg text-slate-900 mb-1" + (passwordError ? " placeholder-red-300" : "")} placeholder={passwordError || "Password..."} bind:value={details.password} />
+            <div class="w-2/3 flex items-center gap-1 text-xs">
+                <hr class="w-2">
+                Email
+                <hr class="w-full">
+            </div>
+            <input type="text"
+                   class={"h-12 rounded-lg w-2/3 px-3 text-lg text-slate-900" + (emailError ? " placeholder-red-300" : "")}
+                   placeholder={emailError || "Email Address..."} bind:value={details.email}/>
+            <div class="w-2/3 flex items-center gap-1 text-xs">
+                <hr class="w-2">
+                Username
+                <hr class="w-full">
+            </div>
+            <input type="text"
+                   class={"h-12 rounded-lg w-2/3 px-3 text-lg text-slate-900" + (usernameError ? " placeholder-red-300" : "")}
+                   placeholder={usernameError || "Username..."} bind:value={details.username}/>
+            <div class="w-2/3 flex items-center gap-1 text-xs">
+                <hr class="w-2">
+                Password
+                <hr class="w-full">
+            </div>
+            <input type="password"
+                   class={"h-12 rounded-lg w-2/3 px-3 text-lg text-slate-900 mb-1" + (passwordError ? " placeholder-red-300" : "")}
+                   placeholder={passwordError || "Password..."} bind:value={details.password}/>
 
             <br>
             <button class="w-2/3 h-12 mb-3 mt-1 bg-gray-800 rounded-lg" on:click={onSubmit}>Sign Up</button>
 
             <div class="flex w-2/3 items-center">
-                <hr class="w-full"><p class="text-xs">OR</p><hr class="w-full">
+                <hr class="w-full">
+                <p class="text-xs">OR</p>
+                <hr class="w-full">
             </div>
 
             <button class="w-2/3 h-12 mb-1 mt-3 bg-white rounded-lg text-black">Signup with Google</button>
