@@ -20,15 +20,15 @@
 
             <div class="pt-32">
                 {#if loggedIn}
-                    <button class="bg-teal-400 text-xl h-16 rounded-lg w-1/2" on:click={()=>goto('/dashboard')}>
+                    <button class="bg-teal-400 hover:bg-teal-600 text-xl px-6 py-3 rounded-lg w-1/2" on:click={()=>goto('/dashboard')}>
                         Go to Dashboard
                     </button>
                 {:else}
-                    <button class="bg-teal-400 text-xl px-6 py-3 rounded-l-lg w-1/4 border-r-2 border-white"
+                    <button class="bg-teal-400 hover:bg-teal-600 text-xl px-6 py-3 rounded-l-lg w-1/4 border-r-2 border-white"
                             on:click={()=>goto('/api/v1/auth/signup')}>
                         Sign Up
                     </button>
-                    <button class="bg-teal-400 text-xl px-6 py-3 rounded-r-lg w-1/4 -translate-x-1 border-l-2 border-white"
+                    <button class="bg-teal-400 hover:bg-teal-600 text-xl px-6 py-3 rounded-r-lg w-1/4 -translate-x-1 border-l-2 border-white"
                             on:click={()=>goto('/api/v1/auth/login')}>
                         Login
                     </button>
