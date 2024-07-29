@@ -1,6 +1,5 @@
 <script>
     import {active} from '$lib/stores.js';
-    import {redirect} from "@sveltejs/kit";
     active.set('home')
 </script>
 
