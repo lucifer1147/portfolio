@@ -1,6 +1,6 @@
 <script>
     import "../app.css";
-    import {active} from "$lib/stores.js";
+    import {active, username} from "$lib/stores.js";
 </script>
 
 <div class="w-full font-roboto text-white bg-gradient-to-r h-full font-extrabold flex-wrap"
@@ -15,7 +15,7 @@
             <a class={($active == 'contact' ? "text-teal-500" : "")} href="/contact">Contact Me</a>
         </div>
 
-        <button class="w-[10%] bg-teal-400 drop-shadow-lg rounded-xl h-[40px] border-2 border-cyan-900">Subscribe
+        <button class="w-[10%] bg-teal-400 drop-shadow-lg rounded-xl h-[40px] border-2 border-cyan-900">{$username}
         </button>
     </nav>
 

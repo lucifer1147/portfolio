@@ -1,6 +1,10 @@
 <script>
-    import {active} from '$lib/stores.js';
+    import {active, username, email} from '$lib/stores.js';
     active.set('home')
+
+    export let data;
+    username.set(data.username)
+    email.set(data.email)
 </script>
 
 <div class="flex justify-center items-center h-[90%]">
