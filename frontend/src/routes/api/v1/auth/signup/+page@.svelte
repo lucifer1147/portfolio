@@ -58,7 +58,7 @@
     }
 </script>
 
-<div class="flex items-center justify-center h-[90%] w-full">
+<div class="flex flex-col gap-y-4 items-center justify-center h-[90%] w-full flex-wrap">
     <div class="h-2/3 w-2/3 backdrop-blur-2xl bg-opacity-50 bg-teal-300 rounded-2xl flex items-center justify-center gap-32">
         <div class="w-[50%] h-full rounded-l-2xl"
              style="background: url('{img}') center">
@@ -106,4 +106,6 @@
             <button class="w-2/3 h-12 mb-1.5 bg-slate-800 rounded-lg">Signup with GitHub</button>
         </div>
     </div>
+    <p class="text-sm font-semibold w-full text-center">Already have an account? Login <a
+            href="/api/v1/auth/login" class="text-blue-500 hover:text-indigo-500">here</a></p>
 </div>
