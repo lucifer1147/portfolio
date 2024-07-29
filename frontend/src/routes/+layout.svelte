@@ -1,6 +1,11 @@
 <script>
     import "../app.css";
-    import {active, username} from "$lib/stores.js";
+    import {active, username, email} from "$lib/stores.js";
+
+    export let data;
+
+    username.set(data.username)
+    email.set(data.email)
 </script>
 
 <div class="w-full font-roboto text-white bg-gradient-to-r h-full font-extrabold flex-wrap"
